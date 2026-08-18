@@ -1,5 +1,5 @@
 ## Facebook Engagement Prediction
-A machine learning project analyzing what drives user engagement on Facebook posts.
+*A machine learning project analyzing what drives user engagement on Facebook posts.*
 
 ## Problem / Business Question
 Which post characteristics and exposure metrics most strongly predict user engagement (likes, comments, shares), and how can a brand optimize its posting strategy to increase interactions?
@@ -23,7 +23,7 @@ Digital marketing teams, social media strategists, and content managers who need
 - Page Total Likes had almost no correlation with Engagement
 - Several Reach/ Impression metrics were highly redundant and removed
 - >>insert finding about engagement here: something abt like/comment share or what leads to engagement : post type, time of posting, reach and impressions etc <<
-- The final model [Insert summarized main finding here] (detials in final report)
+- *The final model [Insert summarized main finding here] (detials in final report)*
 
 ## Dashboard
 >> Insert Tableau link or screenshots here
@@ -42,10 +42,15 @@ Digital marketing teams, social media strategists, and content managers who need
 
 ## Team Members & Contributions
 Team Member 	Contributions
+
 Lavenda	Led EDA, correlation analysis, feature reduction, documentation, repo organization & formatting, co-authored ReadMe and Final Report
+
 Salena	Led preprocessing decisions, correlation analysis, feature reduction repo organization & formatting, co- authored revised ReadMe and Final Report 
+
 Theo	Led Modeling, built supervised models, tuning, evaluation and Final report writing, co-authored ReadMe
+
 Catherine	repo organization and tableau dashboard design & insights
+
 Renee	Tableau dashboard design & insights
 
 ## Link to Final Report
