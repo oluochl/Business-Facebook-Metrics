@@ -51,7 +51,7 @@ Theo	Led Modeling, built supervised models, tuning, evaluation and Final report 
 
 Catherine	repo organization and tableau dashboard design & insights
 
-Renee	Tableau dashboard design & insights
+Renee	Tableau dashboard design & insights and repo organization
 
 ## Link to Final Report
 *insert link here*
