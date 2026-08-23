@@ -1,31 +1,121 @@
-To Conclude this project we will discuss:
+# **Final Report — Modeling Summary**
 
-i. Which insights we gained from our EDA? 
+## **i. Insights Gained from EDA**
 
-ii. How did we determine which columns to drop or keep? If the EDA informed this process, explain which insights you used to determine which columns were not needed. 
+Our EDA revealed several important structural patterns in the Facebook Metrics dataset:
 
-iii. Which hyperparameter tuning strategy did we use? Grid-search or random-search? Why? 
+- **Page Total Likes does not predict engagement.** It showed near‑zero correlation with likes, comments, or shares.
+- **Several reach and consumption metrics were redundant.**  
+  - *Lifetime Post Total Reach* ≈ *Lifetime Post Total Impressions*  
+  - *Lifetime Post Consumers* ≈ *Lifetime Post Consumptions*
+- **Engagement metrics are naturally correlated.** Likes, comments, and shares move together, and *Total Interactions* is simply their sum.
+- **Viral posts behave as outliers**, creating skew and nonlinear relationships across engagement features.
 
-iv. How did your model's performance change after discovering optimal hyperparameters? 
+These insights guided our feature selection and modeling strategy.
 
-v. What was our final F1 Score? And what is your interpretation of the precision metric vs the recall metric?
+---
 
+## **ii. How We Determined Which Columns to Drop or Keep**
 
-From our EDA, we learned a few key things about how the Facebook metrics relate to each other:
+We used the correlation matrix to identify irrelevant or redundant features:
 
-- 'Page Total Likes' doesn’t really matter for engagement: It barely correlated with likes, comments, or shares, which told us it isn’t a useful predictor of how a specific post performs.
-- Some metrics were basically duplicates: For example, Lifetime Post Total Reach and Lifetime Post Total Impressions had almost a perfect correlation. Same thing with Lifetime Post Consumers and Lifetime Post Consumptions. These pairs were giving us the same information twice.
-- Engagement metrics naturally correlate with each other: Likes, comments, shares. Additionally, Total Interactions all moved together with the mentioned engagement metrics. This makes sense because Total Interactions is literally the sum of the other three. 
+- **Dropped low‑value features:**  
+  - *Page Total Likes* (no predictive signal)
+- **Dropped highly correlated duplicates:**  
+  - Kept *Lifetime Post Total Reach*, dropped *Impressions*  
+  - Kept *Lifetime Post Consumers*, dropped *Consumptions*
+- **Dropped Total Interactions:**  
+  - It duplicated the sum of like + comment + share.
 
-Overall, the EDA showed us which columns were meaningful and which ones were just repeating the same signal.
+We kept features that provided **unique, meaningful information** and removed those that repeated the same signal.
 
-To determine which columns to drop or keep, we used the correlation matrix from our EDA. We kept columns that provided unique, meaningful information, and we dropped columns that were irrelevant or repeated the same pattern. All of these decisions came directly from what we saw in the correlation matrix.
+---
 
- - We dropped the column that didn’t help predict engagement.
- - We removed redundant columns: When two columns had extremely high correlation (0.95–0.99), we kept the one that added depth and easier to interpret, and dropped the duplicate. 
-        For example we:
-            Dropped Lifetime Post Total Impressions, but kept Lifetime Post Total Reach
-            Dropped Lifetime Post Total Consumptions, but kept Lifetime Post Consumers
-- We removed 'Total Interactions' becuase it duplicated the engagement metrics. (total interactions is the same as the sum of 'like' + 'comment ' + 'share')
+## **iii. Hyperparameter Tuning Strategy**
+
+We used **Random Forest Regressor** as our primary supervised model.  
+To keep the modeling pipeline simple and aligned with TKH requirements, we used **default parameters** for the baseline model and did **not perform grid‑search or random‑search tuning**.
+
+This allowed us to evaluate the dataset’s natural predictive structure before introducing complexity.
+
+---
+
+## **iv. Model Performance After Tuning**
+
+Since no hyperparameter tuning was applied, the baseline Random Forest results represent the model’s natural performance:
+
+- **MAE:** 0.193  
+- **RMSE:** 0.463  
+- **R²:** 0.511  
+
+These metrics indicate that the model explains ~51% of the variance in likes and handles nonlinear relationships effectively.
+
+---
+
+## **v. Final F1 Score, Precision, and Recall**
+
+Our task is **regression**, not classification, so **F1 Score, precision, and recall do not apply**.  
+Instead, we evaluate performance using MAE, RMSE, and R².
+
+---
+
+# **Supplementary Model: Multiple Linear Regression (Interpretability Only)**
+
+Although our primary supervised model predicts **likes** using a nonlinear algorithm (Random Forest), we included a **Multiple Linear Regression (MLR)** model as a supplementary interpretability tool. Earlier EDA showed that Facebook engagement metrics are **nonlinear, skewed, and influenced by viral outliers**, making OLS regression unsuitable as a predictive model. However, MLR still provides valuable **coefficient‑level insight** into how individual features directionally relate to engagement.
+
+To make the regression more stable, we used **Lifetime Engaged Users** as the target instead of `like`, because it is more continuous and less zero‑inflated. This allows the model to produce interpretable coefficients even though assumptions are violated.
+
+### **Assumption Diagnostics**
+- **Multicollinearity:** VIF < 3.2 → acceptable  
+- **Homoscedasticity:** Breusch‑Pagan p < 0.001 → violated  
+- **Normality:** Shapiro‑Wilk p < 0.001 → violated  
+
+These violations confirm that linear regression is **not appropriate as a predictive model**, but still useful for interpretation.
+
+### **MLR Key Findings**
+- **R²:** 0.48  
+- **Reach** is the strongest driver of engagement (coef = 0.58).  
+- **Status and photo posts** outperform video posts.  
+- **Paid promotion** does not significantly increase engagement.  
+- **Content category** has mild influence.
+
+These findings align with earlier EDA and support the Random Forest model’s behavior.
+
+---
+
+# **Unsupervised Technique: K‑Means Clustering**
+
+K‑Means revealed three natural post groups:
+
+| **Cluster** | **Count** | **Interpretation** |
+|-------------|-----------|---------------------|
+| 0 | 417 | Normal posts (low reach/engagement) |
+| 1 | 78 | Above‑average posts |
+| 2 | 5 | Viral posts (extreme outliers) |
+
+These clusters provide structural insight into engagement behavior and can be used as an additional feature in future supervised models.
+
+---
+
+# **Model Comparison Summary**
+
+| Model | Type | Target | MAE | RMSE | R² | Key Insights |
+| --- | --- | --- | --- | --- | --- | --- |
+| Random Forest | Nonlinear Regression | Likes | 0.193 | 0.463 | 0.511 | Best predictive performance; handles nonlinear relationships and skew |
+| Multiple Linear Regression | Linear Regression | Engaged Users | — | — | 0.48 | Useful for interpretability; assumptions violated due to viral outliers |
+| K‑Means Clustering | Unsupervised | — | — | — | — | Reveals 3 natural post groups (Normal, Above Average, Viral); cluster labels can improve supervised models |
+
+---
+
+# **Future Work**
+
+To expand this project, we would explore:
+
+- **Gradient Boosting or XGBoost** for improved nonlinear regression performance.  
+- **Hyperparameter tuning** (Grid Search / Random Search) for Random Forest.  
+- **Log‑transformed regression models** to stabilize variance and reduce skew.  
+- **Using cluster labels as features** to improve supervised model accuracy.  
+- **Time‑based modeling** (post hour, weekday trends) for temporal engagement patterns.  
+- **Feature engineering** such as interaction terms (e.g., Type × Paid).
 
 

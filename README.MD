@@ -16,30 +16,33 @@ Digital marketing teams, social media strategists, and content managers who need
 ## High-Level Approach
 - Exploratory Data Analysis
 - Data Cleaning & Preprocessing 
+- Unsueprvised Modeling (K-Means Clustering)
 - Supervised Modeling to Predict Engagement
 - Tableau Dashboard to Summarize Insights
 
 ## Key Findings 
 - Page Total Likes had almost no correlation with Engagement
 - Several Reach/ Impression metrics were highly redundant and removed
-- >>insert finding about engagement here: something abt like/comment share or what leads to engagement : post type, time of posting, reach and impressions etc <<
-- *The final model [Insert summarized main finding here] (detials in final report)*
+- Engagement is most strongly driven by post type, posting time, and reach/impression metrics
+- The final model (Random Forest) explained `51% of the variance in likes; MLR provided coeeficient level interpretability (details in Final Report)
 
 ## Dashboard
 >> Insert Tableau link or screenshots here
 
 ## Reccomendations
 - Use impressions based metrics to monitor content performance (much stronger predictor than Page Total Likes or Lifetime Post Total Impressions)
--
--
--
--
+- Prioritize content formats that historically drive higher engagment (status + photo posts)
+- Optimize posting time based on weekday/hour patterns 
+- Paid promotion does not relaibly increase enegagement - focus on organiz drivers instead 
 
 ## Limitations and Next Steps
-- 
+- Viral posts behave as outliers and introduce skew/nonlinearity
 - Engagement definitions are platform-specific (not the uniform accross platforms)
 - *Future work: [insert team ideas here]*
-
+    - Gradient Boosting/ XG Boost for improved nonlinear modeling
+    -use cluster labels as features in supervised models 
+    -Hyperparameter tuning for Radnom Forest
+    - Log- transformed regression models to stabalize vairance (in instances similar to MLR)
 ## Team Members & Contributions
 Team Member 	Contributions
 
