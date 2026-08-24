@@ -20,7 +20,7 @@ These insights guided our feature selection and modeling strategy.
 We used the correlation matrix to identify irrelevant or redundant features:
 
 - **Dropped low‑value features:**  
-  - *Page Total Likes* (no predictive signal)
+  - *Page Total Likes* (little linear association with the engagement outcomes/ no predictive signal)
 - **Dropped highly correlated duplicates:**  
   - Kept *Lifetime Post Total Reach*, dropped *Impressions*  
   - Kept *Lifetime Post Consumers*, dropped *Consumptions*
@@ -33,8 +33,7 @@ We kept features that provided **unique, meaningful information** and removed th
 
 ## **iii. Baseline Modeling Strategy**
 
-We used **Random Forest Regressor** as our primary supervised model.  
-To keep the modeling pipeline simple and aligned with TKH requirements, we used **default parameters** for the baseline model and did **not perform grid‑search or random‑search tuning**.
+We used **Random Forest Regressor** as our primary supervised model because the dataset contained mixed feature types, skewed engagement metrics, outliers, and nonlinear relationships. The processed data was divided into an **80% training set and 20% test set** using `random_state=42`. We used the model’s default parameters to establish a baseline and did not perform grid-search or random-search tuning. 
 
 This allowed us to evaluate the dataset’s natural predictive structure before introducing complexity.
 
@@ -42,14 +41,14 @@ This allowed us to evaluate the dataset’s natural predictive structure before 
 
 ## **iv. Baseline Model Performance**
 
-Since no hyperparameter tuning was applied, the baseline Random Forest results represent the model’s natural performance:
+Since no hyperparameter tuning was applied, the baseline Random Forest results represent the model’s natural performance. The baseline Random Forest produced the following test results:
 
 - **MAE:** 0.193  
 - **RMSE:** 0.463  
 - **R²:** 0.511  
 
-Because the target variable was normalized before modeling, MAE and RMSE are reported on the transformed scale.
-These metrics indicate that the model explains ~51% of the variance in likes and handles nonlinear relationships effectively.
+Because the target variable, `likes` was scaled before modeling,  MAE and RMSE are reported in transformed units rather than raw numbers of likes.
+These metrics indicate that the model explains ~51% of the test-set variance in the transformed 'likes' target and demonstrates moderate predictive performance in nonlinear relationships.
 
 ---
 
@@ -62,7 +61,7 @@ Instead, we evaluate performance using MAE, RMSE, and R².
 
 # **Supplementary Model: Multiple Linear Regression (Interpretability Only)**
 
-Although our primary supervised model predicts **likes** using a nonlinear algorithm (Random Forest), we included a **Multiple Linear Regression (MLR)** model as a supplementary interpretability tool. Earlier EDA showed that Facebook engagement metrics are **nonlinear, skewed, and influenced by viral outliers**, making OLS regression unsuitable as a predictive model. However, MLR still provides valuable **coefficient‑level insight** into how individual features directionally relate to engagement.
+Although our primary supervised model predicts **likes** using a nonlinear algorithm (Random Forest), we included a **Multiple Linear Regression (MLR)** model as a supplementary interpretability tool. Earlier EDA showed that Facebook engagement metrics are **nonlinear, skewed, and influenced by viral outliers**, making MLR regression less suitable as a predictive model. However, MLR still provides valuable coefficient‑level insight into how individual features directionally relate to engagement.
 
 To make the regression more stable, we used **Lifetime Engaged Users** as the target instead of `like`, because it is more continuous and less zero‑inflated. This allows the model to produce interpretable coefficients even though assumptions are violated.
 
@@ -71,7 +70,9 @@ To make the regression more stable, we used **Lifetime Engaged Users** as the ta
 - **Homoscedasticity:** Breusch‑Pagan p < 0.001 → violated  
 - **Normality:** Shapiro‑Wilk p < 0.001 → violated  
 
-These violations confirm that linear regression is **not appropriate as a predictive model**, but still useful for interpretation.
+The diagnostics showed acceptable multicollinearity levels, but the assumptions of constant residual variance and normally distributed residuals were not met. These violations make MLR less suitable as the project’s primary predictive model and limit the reliability of standard OLS inference.
+
+Accordingly, the coefficients should be interpreted as exploratory associations rather than causal effects. 
 
 ### **MLR Key Findings**
 - **R²:** 0.48  
@@ -80,13 +81,13 @@ These violations confirm that linear regression is **not appropriate as a predic
 - **Paid promotion** does not significantly increase engagement.  
 - **Content category** has mild influence.
 
-These findings align with earlier EDA and support the Random Forest model’s behavior.
+These results provide an exploratory, interpretable view of how selected post characteristics relate to Lifetime Engaged Users. These findings align with earlier EDA and support the Random Forest model’s behavior.
 
 ---
 
 # **Unsupervised Technique: K‑Means Clustering**
 
-K‑Means revealed three natural post groups:
+Using a three-cluster solution, K-Means segmented the posts into three performance groups:
 
 | **Cluster** | **Count** | **Interpretation** |
 |-------------|-----------|---------------------|
@@ -94,18 +95,17 @@ K‑Means revealed three natural post groups:
 | 1 | 78 | Above‑average posts |
 | 2 | 5 | Viral posts (extreme outliers) |
 
-These clusters provide structural insight into engagement behavior and can be used as an additional feature in future supervised models.
+These clusters provide structural insight into engagement behavior and can be used as an additional feature in a future supervised pipeline.
 
 ---
 
 # **Model Comparison Summary**
 
-| Model | Type | Target | MAE | RMSE | R² | Key Insights |
-| --- | --- | --- | --- | --- | --- | --- |
-| Random Forest | Nonlinear Regression | Likes | 0.193 | 0.463 | 0.511 | Best predictive performance; handles nonlinear relationships and skew |
-| Multiple Linear Regression | Linear Regression | Engaged Users | — | — | 0.48 | Useful for interpretability; assumptions violated due to viral outliers |
-| K‑Means Clustering | Unsupervised | — | — | — | — | Reveals 3 natural post groups (Normal, Above Average, Viral); cluster labels can improve supervised models |
-
+| Model | Type | Target | MAE | RMSE | R² | Key Insight |
+|---|---|---|---:|---:|---:|---|
+| Random Forest | Nonlinear regression | Scaled likes | 0.193 | 0.463 | 0.511 | Primary predictive model; captured nonlinear relationships |
+| Multiple Linear Regression | Linear regression | Lifetime Engaged Users | — | — | 0.480 | Supplementary interpretability model; assumption violations require cautious interpretation |
+| K-Means | Unsupervised clustering | — | — | — | — | Segmented posts into normal, above-average, and viral performance groups |
 ---
 
 # **Future Work**
