@@ -43,7 +43,7 @@ Digital marketing teams, social media strategists, and content managers who need
     - Use cluster labels as features in supervised models 
     - Hyperparameter tuning for Random Forest
     - Log- transformed regression models to stabalize variance (in instances similar to MLR)
-    See  **[Full Project Report](REPORT.MD)* for more details 
+    See  **[Full Project Report](REPORT.MD)** for more details 
 
 ## Team Members & Contributions
 Team Member 	Contributions
