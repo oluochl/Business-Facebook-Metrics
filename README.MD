@@ -5,18 +5,18 @@
 Which post characteristics and exposure metrics most strongly predict user engagement (likes, comments, shares), and how can a brand optimize its posting strategy to increase interactions?
 
 ## Intended Audience
-Digital marketing teams, social media strategists, and content managers who need data driven guidance on improving engagement.
+Digital marketing teams, social media strategists, and content managers who need data-driven guidance on improving engagement.
 
 ## Dataset & Source
 - **Data Set**: Facebook Metrics Dataset (19 post level features)
 - **Size**: 500+ posts
-- **Scope**: Post metadata, reach/impression metrics, and engagement outcomes
+- **Scope**: Post metadata, reach and impression metrics, and engagement outcomes
 - **Full variable description**: See README → Appendix Section
 
 ## High-Level Approach
 - Exploratory Data Analysis
 - Data Cleaning & Preprocessing 
-- Unsueprvised Modeling (K-Means Clustering)
+- Unsupervised Modeling (K-Means Clustering)
 - Supervised Modeling to Predict Engagement
 - Tableau Dashboard to Summarize Insights
 
@@ -24,40 +24,40 @@ Digital marketing teams, social media strategists, and content managers who need
 - Page Total Likes had almost no correlation with Engagement
 - Several Reach/ Impression metrics were highly redundant and removed
 - Engagement is most strongly driven by post type, posting time, and reach/impression metrics
-- The final model (Random Forest) explained `51% of the variance in likes; MLR provided coeeficient level interpretability (details in Final Report)
+- The final model (Random Forest) explained `51% of the variance in likes; MLR provided coefficient level interpretability (details in Final Report)
 
 ## Dashboard
 >> Insert Tableau link or screenshots here
 
-## Reccomendations
+## Recommendations
 - Use impressions based metrics to monitor content performance (much stronger predictor than Page Total Likes or Lifetime Post Total Impressions)
-- Prioritize content formats that historically drive higher engagment (status + photo posts)
+- Prioritize content formats that historically drive higher engagement (status + photo posts)
 - Optimize posting time based on weekday/hour patterns 
-- Paid promotion does not relaibly increase enegagement - focus on organiz drivers instead 
+- Paid promotion does not reliably increase enegagement - focus on organic drivers instead 
 
 ## Limitations and Next Steps
 - Viral posts behave as outliers and introduce skew/nonlinearity
-- Engagement definitions are platform-specific (not the uniform accross platforms)
-- *Future work: [insert team ideas here]*
+- Engagement definitions are platform-specific (not the uniform across platforms)
+- *Future work:*
     - Gradient Boosting/ XG Boost for improved nonlinear modeling
-    -use cluster labels as features in supervised models 
-    -Hyperparameter tuning for Radnom Forest
-    - Log- transformed regression models to stabalize vairance (in instances similar to MLR)
+    - Use cluster labels as features in supervised models 
+    - Hyperparameter tuning for Random Forest
+    - Log- transformed regression models to stabalize variance (in instances similar to MLR)
+    See  **[Full Project Report](REPORT.MD)* for more details 
+
 ## Team Members & Contributions
 Team Member 	Contributions
 
-Lavenda	Led EDA, correlation analysis, feature reduction, documentation, repo organization & formatting, co-authored ReadMe and Final Report
+| Team Member | Contributions |
+|---|---|
+| **Lavenda** | Led exploratory data analysis, correlation analysis, and feature reduction; contributed to documentation and repository organization, MLR Modeling, initial README design and co-authored the final report; and produced Tableau Dashboard design. |
+| **Salena** | Led preprocessing decisions and contributed to correlation analysis and feature reduction; supported repository organization and formatting, authored the revised README and co-authored the final report; and contributed to the Tableau Dashboard Design. |
+| **Theo** | Led model development, including supervised modeling, tuning, and evaluation; contributed to final report development; and co-authored the README. |
+| **Catherine** | Contributed to repository organization and Tableau dashboard design, analysis, and insights. |
+| **Renee** | Contributed to Tableau dashboard design, analysis, and insights, as well as repository organization. |
 
-Salena	Led preprocessing decisions, correlation analysis, feature reduction repo organization & formatting, co- authored revised ReadMe and Final Report 
-
-Theo	Led Modeling, built supervised models, tuning, evaluation and Final report writing, co-authored ReadMe
-
-Catherine	repo organization and tableau dashboard design & insights
-
-Renee	Tableau dashboard design & insights and repo organization
-
-## Link to Final Report
-*insert link here*
+## Final Report
+Review the complete methodology, model evaluation, assumption testing, findings, and future opportunities in the **[Full Project Report](REPORT.MD)**.
 
 ## Appendix 
 The 19 columns in the data are divided into three functional categories: 
