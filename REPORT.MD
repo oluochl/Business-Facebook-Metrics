@@ -4,7 +4,7 @@
 
 Our EDA revealed several important structural patterns in the Facebook Metrics dataset:
 
-- **Page Total Likes does not predict engagement.** It showed near‑zero correlation with likes, comments, or shares.
+- **Page Total Likes does not predict engagement. ** It showed little linear association with engagement. It had near zero correlation with likes, comments, or shares.
 - **Several reach and consumption metrics were redundant.**  
   - *Lifetime Post Total Reach* ≈ *Lifetime Post Total Impressions*  
   - *Lifetime Post Consumers* ≈ *Lifetime Post Consumptions*
@@ -31,7 +31,7 @@ We kept features that provided **unique, meaningful information** and removed th
 
 ---
 
-## **iii. Hyperparameter Tuning Strategy**
+## **iii. Baseline Modeling Strategy**
 
 We used **Random Forest Regressor** as our primary supervised model.  
 To keep the modeling pipeline simple and aligned with TKH requirements, we used **default parameters** for the baseline model and did **not perform grid‑search or random‑search tuning**.
@@ -40,7 +40,7 @@ This allowed us to evaluate the dataset’s natural predictive structure before 
 
 ---
 
-## **iv. Model Performance After Tuning**
+## **iv. Baseline Model Performance**
 
 Since no hyperparameter tuning was applied, the baseline Random Forest results represent the model’s natural performance:
 
@@ -48,6 +48,7 @@ Since no hyperparameter tuning was applied, the baseline Random Forest results r
 - **RMSE:** 0.463  
 - **R²:** 0.511  
 
+Because the target variable was normalized before modeling, MAE and RMSE are reported on the transformed scale.
 These metrics indicate that the model explains ~51% of the variance in likes and handles nonlinear relationships effectively.
 
 ---
@@ -74,7 +75,7 @@ These violations confirm that linear regression is **not appropriate as a predic
 
 ### **MLR Key Findings**
 - **R²:** 0.48  
-- **Reach** is the strongest driver of engagement (coef = 0.58).  
+- **Reach** had the strongest positive association with engagement in the MLR model (coef = 0.58).  
 - **Status and photo posts** outperform video posts.  
 - **Paid promotion** does not significantly increase engagement.  
 - **Content category** has mild influence.
