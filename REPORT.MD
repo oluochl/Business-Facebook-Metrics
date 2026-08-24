@@ -43,12 +43,13 @@ This allowed us to evaluate the dataset’s natural predictive structure before 
 
 Since no hyperparameter tuning was applied, the baseline Random Forest results represent the model’s natural performance. The baseline Random Forest produced the following test results:
 
-- **MAE:** 0.193  
-- **RMSE:** 0.463  
-- **R²:** 0.511  
+- **MAE:** 0.193 — On average, the model’s predictions differed from the actual transformed target values by approximately 0.19 units. 
+- **RMSE:** 0.464 — The higher RMSE indicates that some posts produced larger prediction errors, potentially because of unusual or viral engagement patterns. 
+- **R²:** 0.511 — The model explained approximately 51% of the test-set variance in the transformed `like` target.
 
-Because the target variable, `likes` was scaled before modeling,  MAE and RMSE are reported in transformed units rather than raw numbers of likes.
-These metrics indicate that the model explains ~51% of the test-set variance in the transformed 'likes' target and demonstrates moderate predictive performance in nonlinear relationships.
+
+Because the target variable, `like` was scaled before modeling,  MAE and RMSE are expressed in transformed units rather than raw numbers of likes.
+These metrics indicate that the model explains ~51% of the test-set variance in the transformed 'like' target and demonstrates moderate predictive performance in nonlinear relationships.
 
 ---
 
@@ -61,7 +62,7 @@ Instead, we evaluate performance using MAE, RMSE, and R².
 
 # **Supplementary Model: Multiple Linear Regression (Interpretability Only)**
 
-Although our primary supervised model predicts **likes** using a nonlinear algorithm (Random Forest), we included a **Multiple Linear Regression (MLR)** model as a supplementary interpretability tool. Earlier EDA showed that Facebook engagement metrics are **nonlinear, skewed, and influenced by viral outliers**, making MLR regression less suitable as a predictive model. However, MLR still provides valuable coefficient‑level insight into how individual features directionally relate to engagement.
+Although our primary supervised model predicts **like** using a nonlinear algorithm (Random Forest), we included a **Multiple Linear Regression (MLR)** model as a supplementary interpretability tool. Earlier EDA showed that Facebook engagement metrics are **nonlinear, skewed, and influenced by viral outliers**, making MLR less suitable as a predictive model. However, MLR still provides valuable coefficient‑level insight into how individual features directionally relate to engagement.
 
 To make the regression more stable, we used **Lifetime Engaged Users** as the target instead of `like`, because it is more continuous and less zero‑inflated. This allows the model to produce interpretable coefficients even though assumptions are violated.
 
@@ -75,11 +76,10 @@ The diagnostics showed acceptable multicollinearity levels, but the assumptions 
 Accordingly, the coefficients should be interpreted as exploratory associations rather than causal effects. 
 
 ### **MLR Key Findings**
-- **R²:** 0.48  
-- **Reach** had the strongest positive association with engagement in the MLR model (coef = 0.58).  
-- **Status and photo posts** outperform video posts.  
-- **Paid promotion** does not significantly increase engagement.  
-- **Content category** has mild influence.
+- **R²:** 0.48
+- **Reach** had a statistically significant positive association with engagement (coef = 0.58).
+- **Status and photo posts** had statistically significant positive associations relative to the reference post type.
+- **Video posts, paid promotion, and content categories 2 and 3** were not statistically significant.
 
 These results provide an exploratory, interpretable view of how selected post characteristics relate to Lifetime Engaged Users. These findings align with earlier EDA and support the Random Forest model’s behavior.
 
