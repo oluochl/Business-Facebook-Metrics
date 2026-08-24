@@ -54,7 +54,6 @@ Team Member 	Contributions
 | **Salena** | Led preprocessing decisions and contributed to correlation analysis and feature reduction; supported repository organization and formatting, authored the revised README and co-authored the final report; and contributed to the Tableau Dashboard Design. |
 | **Theo** | Led model development, including supervised modeling, tuning, and evaluation; contributed to final report development; and co-authored the README. |
 | **Catherine** | Contributed to repository organization and Tableau dashboard design, analysis, and insights. |
-| **Renee** | Contributed to Tableau dashboard design, analysis, and insights, as well as repository organization. |
 
 ## Final Report
 Review the complete methodology, model evaluation, assumption testing, findings, and future opportunities in the **[Full Project Report](REPORT.MD)**.
