@@ -51,7 +51,7 @@ Team Member 	Contributions
 | Team Member | Contributions |
 |---|---|
 | **Lavenda** | Led exploratory data analysis, correlation analysis, and feature reduction; contributed to documentation and repository organization, MLR Modeling, initial README design and co-authored the final report; and produced Tableau Dashboard design. |
-| **Salena** | Led preprocessing decisions and contributed to correlation analysis and feature reduction; supported repository organization and formatting, authored the revised README and co-authored the final report; and contributed to the Tableau Dashboard Design. |
+| **Sal** | Led preprocessing decisions and contributed to correlation analysis and feature reduction; supported repository organization and formatting, authored the revised README and co-authored the final report; and contributed to the Tableau Dashboard Design. |
 | **Theo** | Led model development, including supervised modeling, tuning, and evaluation; contributed to final report development; and co-authored the README. |
 | **Catherine** | Contributed to repository organization and Tableau dashboard design, analysis, and insights. |
 
