@@ -29,7 +29,7 @@ Digital marketing teams, social media strategists, and content managers who need
 ## Tableau Dashboard
 The Tableau dashboard provides a visual summary of key engagement patterns identified throughout our analysis. See the Final Report for detailed findings and connections to our modeling results.
 
-<iframesrc="https://public.tableau.com/app/profile/oluoch.lavenda/viz/BusinessFacebookMetricsDashboard08_24_2026/FacebookDashboard?publish=yes" width="800" height="600"></iframe>
+![Tableau Dashboard]https://public.tableau.com/app/profile/oluoch.lavenda/viz/BusinessFacebookMetricsDashboard08_24_2026/FacebookDashboard?publish=yes)
 
 ## Recommendations
 - Use impressions based metrics to monitor content performance (much stronger predictor than Page Total Likes or Lifetime Post Total Impressions)
