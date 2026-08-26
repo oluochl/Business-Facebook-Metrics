@@ -110,7 +110,7 @@ These clusters provide structural insight into engagement behavior and can be us
 
 ### Tableau Dashboard
 
-<iframe src="https://public.tableau.com/app/profile/oluoch.lavenda/viz/BusinessFacebookMetricsDashboard08_24_2026/FacebookDashboard?publish=yes" width="800" height="600"></iframe>
+[View Interactive Tableau Dashboard](https://public.tableau.com/app/profile/oluoch.lavenda/viz/BusinessFacebookMetricsDashboard08_24_2026/FacebookDashboard?publish=yes)
 
 *Overall, the dashboard visually reinforces the project’s central finding that Facebook engagement varies considerably across posts and is associated with multiple factors, particularly reach and content format.*
 
