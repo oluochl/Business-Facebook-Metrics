@@ -4,7 +4,7 @@
 
 Our EDA revealed several important structural patterns in the Facebook Metrics dataset:
 
-- **Page Total Likes does not predict engagement. ** It showed little linear association with engagement. It had near zero correlation with likes, comments, or shares.
+- **Page Total Likes showed little relationship with post engagement. ** It showed little linear association with engagement and had near zero correlation with likes, comments, or shares.
 - **Several reach and consumption metrics were redundant.**  
   - *Lifetime Post Total Reach* ≈ *Lifetime Post Total Impressions*  
   - *Lifetime Post Consumers* ≈ *Lifetime Post Consumptions*
@@ -33,7 +33,7 @@ We kept features that provided **unique, meaningful information** and removed th
 
 ## **iii. Baseline Modeling Strategy**
 
-We used **Random Forest Regressor** as our primary supervised model because the dataset contained mixed feature types, skewed engagement metrics, outliers, and nonlinear relationships. The processed data was divided into an **80% training set and 20% test set** using `random_state=42`. We used the model’s default parameters to establish a baseline and did not perform grid-search or random-search tuning. 
+We used **Random Forest Regressor** as our primary supervised model because the dataset contained mixed feature types, skewed engagement metrics, outliers, and nonlinear relationships. We selected `like` as the target because it provides a clear and consistently available measure of post engagement that can be used as a prediction outcome. The processed data was divided into an **80% training set and 20% test set** using `random_state=42`. We used the model’s default parameters to establish a baseline and did not perform grid-search or random-search tuning. 
 
 This allowed us to evaluate the dataset’s natural predictive structure before introducing complexity.
 
@@ -49,7 +49,7 @@ Since no hyperparameter tuning was applied, the baseline Random Forest results r
 
 
 Because the target variable, `like` was scaled before modeling,  MAE and RMSE are expressed in transformed units rather than raw numbers of likes.
-These metrics indicate that the model explains ~51% of the test-set variance in the transformed 'like' target and demonstrates moderate predictive performance in nonlinear relationships.
+These metrics indicate that the model explains ~51% of the test-set variance in the transformed 'like' target and demonstrates moderate predictive performance.
 
 ---
 
@@ -62,14 +62,14 @@ Instead, we evaluate performance using MAE, RMSE, and R².
 
 # **Supplementary Model: Multiple Linear Regression (Interpretability Only)**
 
-Although our primary supervised model predicts **like** using a nonlinear algorithm (Random Forest), we included a **Multiple Linear Regression (MLR)** model as a supplementary interpretability tool. Earlier EDA showed that Facebook engagement metrics are **nonlinear, skewed, and influenced by viral outliers**, making MLR less suitable as a predictive model. However, MLR still provides valuable coefficient‑level insight into how individual features directionally relate to engagement.
+Although our primary supervised model predicts **like** using a nonlinear algorithm (Random Forest), we included a **Multiple Linear Regression (MLR)** model as a supplementary interpretability tool. Our linear regression diagnostics showed that some model assumptions were not fully met, which was consistent with the skewed engagement patterns and extreme viral posts observed during EDA. For this reason, MLR was used to provide coefficient-level insight into how individual features relate to engagement rather than as our primary predictive model.
 
-To make the regression more stable, we used **Lifetime Engaged Users** as the target instead of `like`, because it is more continuous and less zero‑inflated. This allows the model to produce interpretable coefficients even though assumptions are violated.
+To make the regression more stable, we used **Lifetime Engaged Users** as the target instead of `like`, because it is more continuous and less zero‑inflated. TThis allows the model to provide interpretable coefficients, although the diagnostic results indicate that some regression assumptions were not fully met.
 
 ### **Assumption Diagnostics**
 - **Multicollinearity:** VIF < 3.2 → acceptable  
-- **Homoscedasticity:** Breusch‑Pagan p < 0.001 → violated  
-- **Normality:** Shapiro‑Wilk p < 0.001 → violated  
+- **Homoscedasticity:** Breusch‑Pagan p < 0.001 → not met 
+- **Normality:** Shapiro‑Wilk p < 0.001 → not met 
 
 The diagnostics showed acceptable multicollinearity levels, but the assumptions of constant residual variance and normally distributed residuals were not met. These violations make MLR less suitable as the project’s primary predictive model and limit the reliability of standard OLS inference.
 
@@ -104,9 +104,15 @@ These clusters provide structural insight into engagement behavior and can be us
 | Model | Type | Target | MAE | RMSE | R² | Key Insight |
 |---|---|---|---:|---:|---:|---|
 | Random Forest | Nonlinear regression | Scaled likes | 0.193 | 0.463 | 0.511 | Primary predictive model; captured nonlinear relationships |
-| Multiple Linear Regression | Linear regression | Lifetime Engaged Users | — | — | 0.480 | Supplementary interpretability model; assumption violations require cautious interpretation |
+| Multiple Linear Regression | Linear regression | Lifetime Engaged Users | — | — | 0.480 | Supplementary interpretability model; diagnostic results support cautious interpretation |
 | K-Means | Unsupervised clustering | — | — | — | — | Segmented posts into normal, above-average, and viral performance groups |
 ---
+
+### Tableau Dashboard
+
+<iframe src="https://public.tableau.com/app/profile/oluoch.lavenda/viz/BusinessFacebookMetricsDashboard08_24_2026/FacebookDashboard?publish=yes" width="800" height="600"></iframe>
+
+*Overall, the dashboard visually reinforces the project’s central finding that Facebook engagement varies considerably across posts and is associated with multiple factors, particularly reach and content format.*
 
 # **Future Work**
 

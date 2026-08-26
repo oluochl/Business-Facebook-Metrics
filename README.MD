@@ -26,8 +26,10 @@ Digital marketing teams, social media strategists, and content managers who need
 - Engagement is most strongly driven by post type, posting time, and reach/impression metrics
 - The final model (Random Forest) explained `51% of the variance in likes; MLR provided coefficient level interpretability (details in Final Report)
 
-## Dashboard
->> Insert Tableau link or screenshots here
+## Tableau Dashboard
+The Tableau dashboard provides a visual summary of key engagement patterns identified throughout our analysis. See the Final Report for detailed findings and connections to our modeling results.
+
+<iframe src="https://public.tableau.com/app/profile/oluoch.lavenda/viz/BusinessFacebookMetricsDashboard08_24_2026/FacebookDashboard?publish=yes" width="800" height="600"></iframe>
 
 ## Recommendations
 - Use impressions based metrics to monitor content performance (much stronger predictor than Page Total Likes or Lifetime Post Total Impressions)
