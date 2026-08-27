@@ -4,7 +4,7 @@
 
 Our EDA revealed several important structural patterns in the Facebook Metrics dataset:
 
-- **Page Total Likes showed little relationship with post engagement. ** It showed little linear association with engagement and had near zero correlation with likes, comments, or shares.
+- **Page Total Likes showed little relationship with post engagement.** It showed little linear association with engagement and had near zero correlation with likes, comments, or shares.
 - **Several reach and consumption metrics were redundant.**  
   - *Lifetime Post Total Reach* ≈ *Lifetime Post Total Impressions*  
   - *Lifetime Post Consumers* ≈ *Lifetime Post Consumptions*
