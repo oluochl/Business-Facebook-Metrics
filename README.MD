@@ -52,7 +52,7 @@ Team Member 	Contributions
 
 | Team Member | Contributions |
 |---|---|
-| **Lavenda** | Led exploratory data analysis and correlation analysis; contributed to documentation and repository organization, MLR Modeling and interpretation, initial README design, and produced Tableau Dashboard design and configuration |
+| **Lavenda** | Led exploratory data analysis and correlation analysis; contributed to documentation and repository organization, MLR modeling and interpretation, initial README design, and produced Tableau Dashboard design and configuration |
 | **Sal** | Led preprocessing decisions, correlation analysis, and feature reduction; performed K-Means clustering and Random Forest modeling and interpretation; authored the revised README and authored the final report; led repository organization and formatting improvements; and contributed to Tableau dashboard design, analysis, and insights |
 | **Theo** | Led model development, contributed to final report development |
 
