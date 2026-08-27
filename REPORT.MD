@@ -57,14 +57,14 @@ These metrics indicate that the model explains ~51% of the test-set variance in 
 
 Although our primary supervised model predicts **like** using a nonlinear algorithm (Random Forest), we included a **Multiple Linear Regression (MLR)** model as a supplementary interpretability tool. Our linear regression diagnostics showed that some model assumptions were not fully met, which was consistent with the skewed engagement patterns and extreme viral posts observed during EDA. For this reason, MLR was used to provide coefficient-level insight into how individual features relate to engagement rather than as our primary predictive model.
 
-To make the regression more stable, we used **Lifetime Engaged Users** as the target instead of `like`, because it is more continuous and less zero‑inflated. TThis allows the model to provide interpretable coefficients, although the diagnostic results indicate that some regression assumptions were not fully met.
+To make the regression more stable, we used **Lifetime Engaged Users** as the target instead of `like`, because it is more continuous and less zero‑inflated. This allows the model to provide interpretable coefficients, although the diagnostic results indicate that some regression assumptions were not fully met.
 
 ### **Assumption Diagnostics**
 - **Multicollinearity:** VIF < 3.2 → acceptable  
 - **Homoscedasticity:** Breusch‑Pagan p < 0.001 → not met 
 - **Normality:** Shapiro‑Wilk p < 0.001 → not met 
 
-The diagnostics showed acceptable multicollinearity levels, but the assumptions of constant residual variance and normally distributed residuals were not met. These violations make MLR less suitable as the project’s primary predictive model and limit the reliability of standard OLS inference.
+The diagnostics showed acceptable multicollinearity levels, but the assumptions of constant residual variance and normally distributed residuals were not met. These violations make MLR less suitable as the project’s primary predictive model and limit the reliability of standard OLS inference. 
 
 Accordingly, the coefficients should be interpreted as exploratory associations rather than causal effects. 
 
@@ -74,7 +74,7 @@ Accordingly, the coefficients should be interpreted as exploratory associations 
 - **Status and photo posts** had statistically significant positive associations relative to the reference post type.
 - **Video posts, paid promotion, and content categories 2 and 3** were not statistically significant.
 
-These results provide an exploratory, interpretable view of how selected post characteristics relate to Lifetime Engaged Users. These findings align with earlier EDA and support the Random Forest model’s behavior.
+Even with these limitations, the model helped identify which features showed the clearest relationships with engagement, particularly reach and content format, while paid promotion did not show a statistically significant association in this model. These findings suggest that reach and content format are useful factors to monitor when evaluating post performance, while future analysis should test whether these relationships remain consistent across newer or larger datasets and explore additional factors that may influence engagement. These results provide an exploratory, interpretable view of how selected post characteristics relate to Lifetime Engaged Users. These findings align with earlier EDA and support the Random Forest model’s behavior.
 
 ---
 
@@ -100,12 +100,29 @@ These clusters provide structural insight into engagement behavior and can be us
 | Multiple Linear Regression | Linear regression | Lifetime Engaged Users | — | — | 0.480 | Supplementary interpretability model; diagnostic results support cautious interpretation |
 | K-Means | Unsupervised clustering | — | — | — | — | Segmented posts into normal, above-average, and viral performance groups |
 ---
+## What the Models Tell Us
+
+Together, the three modeling approaches provide complementary views of Facebook post engagement. Random Forest demonstrated moderate predictive performance, explaining approximately 51% of the test-set variance in scaled likes, and was better suited to the nonlinear patterns and outliers identified during EDA. More importantly, this showed that the available post characteristics contain meaningful predictive signal, but they do not fully explain engagement. Multiple Linear Regression provided interpretability, explaining approximately 48% of the variation in Lifetime Engaged Users and showing that reach, status posts, and photo posts had statistically significant positive associations with engagement. K-Means added a different perspective by identifying three naturally occurring performance groups: normal, above-average, and a very small group of viral posts. This segmentation helps distinguish typical performance from exceptional performance, allowing social media teams to evaluate posts against more meaningful benchmarks and examine what characteristics separate higher-performing content from typical posts.
+
+Taken together, these findings suggest that Facebook engagement is nonlinear, strongly associated with reach and content format, and influenced by a small number of extreme viral posts. No single model captures the entire engagement pattern, but the models collectively provide both predictive and descriptive insight into how posts perform.
+
+---
 
 ### Tableau Dashboard
 
 [View Interactive Tableau Dashboard](https://public.tableau.com/app/profile/oluoch.lavenda/viz/BusinessFacebookMetricsDashboard08_26_2026/FacebookDashboard)
 
 *Overall, the dashboard visually reinforces the project’s central finding that Facebook engagement varies considerably across posts and is associated with multiple factors, particularly reach and content format.*
+
+---
+
+## Conclusion
+
+This project examined Facebook post engagement through exploratory analysis, supervised learning, and clustering. Our findings showed that engagement is not driven by a single factor and that the dataset contains substantial variation, including a small number of viral posts that behave differently from typical content.
+
+Across the analysis, reach and content format emerged as meaningful indicators of engagement, while the nonlinear structure of the data supported Random Forest as the primary predictive approach. Overall, the project demonstrates how combining exploratory, predictive, and descriptive methods can provide a more complete understanding of social media performance while also identifying opportunities for future model improvement.
+
+---
 
 # **Future Work**
 
