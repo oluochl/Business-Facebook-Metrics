@@ -53,13 +53,6 @@ These metrics indicate that the model explains ~51% of the test-set variance in 
 
 ---
 
-## **v. Final F1 Score, Precision, and Recall**
-
-Our task is **regression**, not classification, so **F1 Score, precision, and recall do not apply**.  
-Instead, we evaluate performance using MAE, RMSE, and R².
-
----
-
 # **Supplementary Model: Multiple Linear Regression (Interpretability Only)**
 
 Although our primary supervised model predicts **like** using a nonlinear algorithm (Random Forest), we included a **Multiple Linear Regression (MLR)** model as a supplementary interpretability tool. Our linear regression diagnostics showed that some model assumptions were not fully met, which was consistent with the skewed engagement patterns and extreme viral posts observed during EDA. For this reason, MLR was used to provide coefficient-level insight into how individual features relate to engagement rather than as our primary predictive model.
@@ -110,7 +103,7 @@ These clusters provide structural insight into engagement behavior and can be us
 
 ### Tableau Dashboard
 
-[View Interactive Tableau Dashboard](https://public.tableau.com/app/profile/oluoch.lavenda/viz/BusinessFacebookMetricsDashboard08_24_2026/FacebookDashboard?publish=yes)
+[View Interactive Tableau Dashboard](https://public.tableau.com/app/profile/oluoch.lavenda/viz/BusinessFacebookMetricsDashboard08_26_2026/FacebookDashboard)
 
 *Overall, the dashboard visually reinforces the project’s central finding that Facebook engagement varies considerably across posts and is associated with multiple factors, particularly reach and content format.*
 
