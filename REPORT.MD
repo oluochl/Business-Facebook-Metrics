@@ -107,14 +107,14 @@ Together, the three modeling approaches provide complementary views of Facebook 
 Taken together, these findings suggest that Facebook engagement is nonlinear, strongly associated with reach and content format, and influenced by a small number of extreme viral posts. No single model captures the entire engagement pattern, but the models collectively provide both predictive and descriptive insight into how posts perform.
 
 ---
-### Tableau Dashboard
+# **Tableau Dashboard**
 
 [View Interactive Tableau Dashboard](https://public.tableau.com/app/profile/oluoch.lavenda/viz/BusinessFacebookMetricsDashboard08_26_2026/FacebookDashboard)
 
 *Overall, the dashboard visually reinforces the project’s central finding that Facebook engagement varies considerably across posts and is associated with multiple factors, particularly reach and content format.*
 
 ---
-## Conclusion
+# **Conclusion**
 
 This project examined Facebook post engagement through exploratory analysis, supervised learning, and clustering. Our findings showed that engagement is not driven by a single factor and that the dataset contains substantial variation, including a small number of viral posts that behave differently from typical content.
 
